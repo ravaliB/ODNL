@@ -1,4 +1,4 @@
-package tool;
+package genetic;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,22 +11,20 @@ public class SequenceGenerator {
 	
 	public static void initGenerator(long seed)
 	{
-		if (rng == null)
 			rng = new Random(seed);
 	}
 	
 	public static void initGenerator()
 	{
-		if (rng == null)
 			rng = new Random();
 	}
 	
-	public static List<Integer> generate(int max)
+	public static Sequence generate(int max)
 	{
 		if (rng == null)
 			SequenceGenerator.initGenerator();
 		
-		ArrayList<Integer> result = new ArrayList<Integer>(max);
+		Sequence result = new Sequence(max);
 		
 		for (int i = 0; i < max; i++)
 			result.add(i);
