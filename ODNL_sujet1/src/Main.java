@@ -15,7 +15,9 @@ public class Main {
 		Problem p = Fileutils.getfilesubject2(args[0]);
 		p.print();
 		PopulationGenerator popu_generator = new PopulationGenerator();
-		Population popu = popu_generator.generate_population(p, 1000);
-		popu.print();
+		Population population = popu_generator.generate_population(p, 1000);
+		System.out.println(population);
+		population.sort();
+		System.out.println(population);
 	}
 }
