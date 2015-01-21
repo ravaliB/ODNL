@@ -1,5 +1,8 @@
 package tool;
 
+import genetic.Population;
+import genetic.Sequence;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -66,7 +69,7 @@ public class Problem {
 		}
 	}
 	
-	private int compute(List<Integer> gene)
+	private int compute(Sequence gene)
 	{
 		int[][] tabforCmax = new int[nb_cpu][nb_tasks];
 		
@@ -89,6 +92,20 @@ public class Problem {
 		
 		return tabforCmax[nb_cpu - 1][gene.get(gene.size() - 1)];
 	}
+	
+	private List<Integer> selectGoodParent(Population population)
+	{
+		double p = Math.random();
+		double cumulativeProbability = 0.0;
+		for (int i = 0; i < population.size(); i++) {
+		    cumulativeProbability += 2*(i+1)/(population.size() * (population.size()+1));
+		    if (p <= cumulativeProbability) {
+		        return population.get(i);
+		    }
+		}
+		return population.get(population.size() - 1);
+	}
+	
 	
 	
 }
