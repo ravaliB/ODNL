@@ -24,26 +24,26 @@ public class Fileutils {
 			
 			
 			String[] l =  line.split(splitBy);
-			p.setNb_tasks(Integer.parseInt(l[1]));
-			p.setNb_cpu(Integer.parseInt(l[2]));
-			p.setInitseed(Integer.parseInt(l[3]));
-			p.setLowerbound(Integer.parseInt(l[4]));
-			p.setUpperbound(Integer.parseInt(l[5]));
+			p.nb_tasks =Integer.parseInt(l[1]);
+			p.nb_cpu = Integer.parseInt(l[2]);
+			p.initseed = Integer.parseInt(l[3]);
+			p.lowerbound = (Integer.parseInt(l[4]));
+			p.upperbound = Integer.parseInt(l[5]);
 			
-			int[][] tasktimes = new int[p.getNb_cpu()][p.getNb_tasks()];
+			int[][] tasktimes = new int[p.nb_cpu][p.nb_tasks];
 			
 			
 			br.readLine();
-			for (int i = 0;  i < p.getNb_cpu(); i++)
+			for (int i = 0;  i < p.nb_cpu; i++)
 			{
 				line = br.readLine();
 				l = line.split(splitBy);
-				for (int j = 0; j < p.getNb_tasks(); j++)
+				for (int j = 0; j < p.nb_tasks; j++)
 				{
 					tasktimes[i][j] = Integer.parseInt(l[j + 1]);
 				}
 			}
-			p.setTasktimes(tasktimes);
+			p.tasktimes = tasktimes;
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
