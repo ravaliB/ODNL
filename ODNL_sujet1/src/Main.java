@@ -1,8 +1,10 @@
 import genetic.Population;
 import genetic.PopulationGenerator;
+import genetic.Sequence;
 import iofile.Fileutils;
 
 import java.text.ParseException;
+import java.util.Random;
 
 import tool.Problem;
 
@@ -13,11 +15,39 @@ public class Main {
 		System.out.println("Opening problem file :");
 		System.out.println(args[0]);
 		Problem p = Fileutils.getfilesubject2(args[0]);
-		p.print();
-		PopulationGenerator popu_generator = new PopulationGenerator();
-		Population population = popu_generator.generate_population(p, 1000);
-		System.out.println(population);
-		population.sort();
-		System.out.println(population);
+		
+		Population population;
+		Population newgen;
+		
+		PopulationGenerator popu_generator = new PopulationGenerator(p.initseed);
+		population = popu_generator.generate_population(p, 50);
+		newgen = popu_generator.generate_newgen(population);
+		
+		
+		Random rn = new Random();
+		int optimalvalue = newgen.get(newgen.size() -1).cost;
+		
+		//la reproduction
+		for (int i = 1; i < 20 ; i++)
+		{
+			population = newgen;
+			newgen = popu_generator.generate_newgen(population);
+			optimalvalue = newgen.get(newgen.size() -1).cost;
+			
+			//la mutation
+			for (int j = 0; j < newgen.size(); j += newgen.size() / 10)
+			{
+				newgen.Mutate(rn.nextInt(newgen.size()));
+			}
+			newgen.sort();
+			System.out.println("Iteration n°" + i + " : Best value found => " +optimalvalue);
+		}
+		
+		System.out.println("Best value found : " + optimalvalue);
+		System.out.println("Best Sequence " + newgen.get(newgen.size() -1));
+		
+		
+		
+		
 	}
 }

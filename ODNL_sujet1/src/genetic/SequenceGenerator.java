@@ -28,4 +28,5 @@ public class SequenceGenerator {
 		Collections.shuffle(result, rng);
 		return result;
 	}
+	
 }

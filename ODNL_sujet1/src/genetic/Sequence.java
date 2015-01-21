@@ -1,6 +1,8 @@
 package genetic;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
 
 @SuppressWarnings("serial")
 public class Sequence extends ArrayList<Integer>

@@ -9,10 +9,10 @@ public class SequenceComparator implements Comparator<Sequence> {
 	@Override
 	public int compare(Sequence o1, Sequence o2) {
 
-		if (o1.cost < o2.cost)
+		if (o1.cost >= o2.cost)
 			return -1;
-		
-		return 1;
+		else
+			return 1;
 			
 	}
 
