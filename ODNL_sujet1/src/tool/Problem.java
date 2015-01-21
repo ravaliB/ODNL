@@ -1,5 +1,9 @@
 package tool;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class Problem {
 
 	private int nb_cpu;
@@ -9,7 +13,7 @@ public class Problem {
 	private int lowerbound;
 	private int initseed;
 	
-	
+	private List<List<Integer>> generation;
 	
 	public int getNb_tasks() {
 		return nb_tasks;
@@ -60,8 +64,31 @@ public class Problem {
 			}
 			System.out.println(pctime);
 		}
-		
-		
 	}
+	
+	private int compute(List<Integer> gene)
+	{
+		int[][] tabforCmax = new int[nb_cpu][nb_tasks];
+		
+		tabforCmax[0][gene.get(0)] = tasktimes[0][gene.get(0)];
+		
+		for (int i = 1 ; i < nb_tasks; i++)
+		{
+			tabforCmax[0][gene.get(i)] = tabforCmax[0][gene.get(i - 1)] + tasktimes[0][gene.get(i)];	
+		}
+		for (int i = 1 ; i < nb_cpu; i++)
+		{
+			tabforCmax[i][gene.get(0)] = tabforCmax[i - 1][gene.get(0)] + tasktimes[i][gene.get(0)];	
+		}
+		
+		for (int i = 1; i < nb_tasks; i++)
+			for (int j = 1; j < nb_cpu; j++)
+			{
+				tabforCmax[j][gene.get(i)] = Math.max(tabforCmax[j - 1][gene.get(i)], tabforCmax[j][gene.get(i - 1)]) + tasktimes[j][gene.get(i)];
+			}
+		
+		return tabforCmax[nb_cpu - 1][gene.get(gene.size() - 1)];
+	}
+	
 	
 }
