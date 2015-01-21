@@ -11,8 +11,9 @@ public class SequenceComparator implements Comparator<Sequence> {
 
 		if (o1.cost < o2.cost)
 			return -1;
-		
-		return 1;
+		else if (o1.cost > o2.cost)
+			return 1;
+		return 0;
 			
 	}
 

@@ -5,25 +5,28 @@ import tool.Problem;
 public class PopulationGenerator 
 {
 	long seed;
+	Problem problem;
 	SequenceGenerator sqG;
 	
-	public PopulationGenerator()
+	public PopulationGenerator(Problem pb)
 	{
 		sqG = new SequenceGenerator();
+		problem = pb;
 	}
 	
-	public PopulationGenerator(long seed)
+	public PopulationGenerator(Problem pb, long seed)
 	{
 		sqG = new SequenceGenerator(seed);
+		problem = pb;
 	}
 	
-	public Population generate_population(Problem pb, int popu_size)
+	public Population generate_population(int popu_size)
 	{
-		SequenceEvaluator sqE = new SequenceEvaluator(pb);
+		SequenceEvaluator sqE = new SequenceEvaluator(problem);
 		Population population = new Population(sqE, popu_size);
 
 		for (int i = 0; i < popu_size; i++)
-			population.add(sqG.generate(pb.nb_tasks));
+			population.add(sqG.generate(problem.nb_tasks));
 		
 		return population;
 	}

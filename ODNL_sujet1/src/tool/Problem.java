@@ -31,7 +31,7 @@ public class Problem {
 	}
 	
 	
-	private Sequence selectGoodParent(Population population)
+	public Sequence selectGoodParent(Population population)
 	{
 		double p = Math.random();
 		double cumulativeProbability = 0.0;
@@ -44,10 +44,10 @@ public class Problem {
 		return population.get(population.size() - 1);
 	}
 	
-	private Sequence Mutate(Sequence gene)
+	public Sequence mutate(Sequence gene)
 	{
-		int randomIndex = (int)(Math.random()*gene.size());
-		Integer tmp =gene.get(randomIndex);
+		int randomIndex = (int)(Math.random() * gene.size());
+		Integer tmp = gene.get(randomIndex);
 		gene.remove(randomIndex);
 		gene.add(randomIndex - (int)Math.random()*randomIndex, tmp);
 		return gene;
