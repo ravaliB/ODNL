@@ -103,7 +103,7 @@ public class Population extends ArrayList<Sequence>
 	
 	
 	//fait muter le gene d'indice index dans la population
-	public void Mutate(int index)
+	public void Mutate1(int index)
 	{
 		Random rand = new Random();
 		Sequence gene = this.get(index);
@@ -118,7 +118,28 @@ public class Population extends ArrayList<Sequence>
 		
 		gene.cost = sqE.compute_cost(gene);
 	}
-	
+	public void Mutate2(int index)
+	{
+		Random rand = new Random();
+		Sequence gene = this.get(index);
+		int randomIndex = rand.nextInt(gene.size());
+		
+		Integer tmpval1 = gene.get(randomIndex);
+		Integer tmpval2;
+		if (randomIndex != gene.size() -1)
+		{
+			tmpval2 =gene.get(randomIndex + 1);
+			gene.set(randomIndex,  tmpval2);
+			gene.set(randomIndex + 1, tmpval1);
+		}
+		else
+		{
+			tmpval2 =gene.get(randomIndex - 1);
+			gene.set(randomIndex,  tmpval2);
+			gene.set(randomIndex - 1, tmpval1);
+		}
+		
+	}
 	public double ComputeDisparity()
 	{
 		double disparity = 0.0;
