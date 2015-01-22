@@ -34,4 +34,14 @@ public class Sequence extends ArrayList<Integer>
 		s += this.cost;
 		return s;
 	}
+	public int getDist(Sequence seq)
+	{
+		int distance = 0;
+		for (int i = 0; i < seq.size(); i++)
+		{
+			if (!(seq.get(i).intValue() == this.get(i).intValue()))
+				distance++;
+		}
+		return distance;
+	}
 }
