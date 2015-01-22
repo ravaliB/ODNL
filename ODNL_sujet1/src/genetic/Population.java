@@ -13,6 +13,7 @@ import tool.SequenceComparator;
 public class Population extends ArrayList<Sequence> 
 {
 	SequenceEvaluator sqE;
+	double disparity;
 	
 	
 	public Population(SequenceEvaluator sqE)
@@ -118,5 +119,23 @@ public class Population extends ArrayList<Sequence>
 		gene.cost = sqE.compute_cost(gene);
 	}
 	
-	
+	public double ComputeDisparity()
+	{
+		double disparity = 0.0;
+		Sequence seq1;
+		Sequence seq2;
+		for (int i = 0; i < this.size(); i++)
+		{
+			for (int j = i+1; j < this.size(); j++)
+			{
+				seq1 = this.get(i);
+				seq2 = this.get(j);
+				disparity += seq1.getDist(seq2);
+			}
+		}
+		disparity = disparity / this.size();
+		this.disparity = disparity;
+		
+		return disparity;
+	}
 }

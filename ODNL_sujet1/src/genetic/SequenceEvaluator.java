@@ -34,4 +34,5 @@ public class SequenceEvaluator {
 		
 		return tabforCmax[problem.nb_cpu - 1][gene.get(gene.size() - 1)];
 	}
+	
 }

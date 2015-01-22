@@ -130,15 +130,15 @@ public class PopulationGenerator
 	
 	private Sequence selectGoodParent(Population population)
 	{
-		double p = Math.random();
+		Random rn = new Random();
+		double p = rn.nextDouble();
 		double cumulativeProbability = 0.0;
-		for (int i = 0; i < population.size(); i++) {
-		    cumulativeProbability += 2*(i+1)/(population.size() * (population.size()+1));
-		    if (p <= cumulativeProbability) {
-		        return population.get(i);
-		    }
+		int i =0;
+		while (cumulativeProbability < p) {
+		    i++;
+		    cumulativeProbability += ((double)2*(i))/(double)((population.size() * (population.size()+1)));
 		}
-		return population.get(population.size() - 1);
+		return population.get(Math.max(0, i-1));
 	}
 	
 	
