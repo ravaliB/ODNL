@@ -13,7 +13,7 @@ import tool.SequenceComparator;
 public class Population extends ArrayList<Sequence> 
 {
 	SequenceEvaluator sqE;
-	double disparity;
+	public double disparity;
 	
 	
 	public Population(SequenceEvaluator sqE)
@@ -124,16 +124,18 @@ public class Population extends ArrayList<Sequence>
 		double disparity = 0.0;
 		Sequence seq1;
 		Sequence seq2;
+		int count = 0;
 		for (int i = 0; i < this.size(); i++)
 		{
 			for (int j = i+1; j < this.size(); j++)
 			{
+				count++;
 				seq1 = this.get(i);
 				seq2 = this.get(j);
 				disparity += seq1.getDist(seq2);
 			}
 		}
-		disparity = disparity / this.size();
+		disparity = disparity / count;
 		this.disparity = disparity;
 		
 		return disparity;

@@ -47,9 +47,14 @@ public class Main {
 				optimalvalue = BestSequence.cost;
 			}
 			//la mutation
-			for (int j = 0; j < newgen.size(); j += newgen.size() / 10)
+			newgen.ComputeDisparity();
+			if (newgen.disparity < (double) newgen.get(0).size() / 10)
 			{
+				System.out.println("let's mute");
+				for (int j = 0; j < newgen.size(); j += 5)
+				{
 				newgen.Mutate(rn.nextInt(newgen.size()));
+				}
 			}
 			newgen.sort();
 			System.out.println(newgen.best());

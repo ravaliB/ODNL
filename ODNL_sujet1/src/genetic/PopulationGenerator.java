@@ -136,7 +136,7 @@ public class PopulationGenerator
 		int i =0;
 		while (cumulativeProbability < p) {
 		    i++;
-		    cumulativeProbability += ((double)2*(i))/(double)((population.size() * (population.size()+1)));
+		    cumulativeProbability += ((double)2*(i))/(double)((population.size() * (population.size() - 1)));
 		}
 		return population.get(Math.max(0, i-1));
 	}
