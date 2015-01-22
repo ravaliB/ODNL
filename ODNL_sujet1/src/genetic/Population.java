@@ -56,6 +56,34 @@ public class Population extends ArrayList<Sequence>
 		return new Population(this.subList(this.size()-1-n, this.size()-1), sqE);
 	}
 	
+	public void probabilistic_distribution()
+	{
+		int seq_size = this.get(0).size();
+		int mat_distrib[][] = new int[seq_size][seq_size];
+		for (Sequence s : this)
+		{
+			for (int i = 0; i < seq_size; i++)
+			{
+				mat_distrib[s.get(i)][i]++;
+			}
+		}
+		int width = (int) Math.log10(seq_size) +2;
+		String format = "%" + width +"d";
+		for (int i = 0; i < seq_size; i++)
+		{
+			String s = "Job n° " + String.format(format, i) + " :";
+			s += "   < "; 
+			
+			for (int j = 0; j < seq_size; j++)
+			{
+					s += String.format(format, mat_distrib[i][j]) + " ";
+			}
+			s += ">";
+			System.out.println(s);
+		}
+			
+	}
+	
 	
 	@Override
 	public String toString()
