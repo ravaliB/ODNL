@@ -16,6 +16,7 @@ public class Problem {
 	public int lowerbound;
 	public int initseed;
 	
+	
 	public void print()
 	{
 		for (int i = 0; i < nb_cpu; i++)
@@ -29,5 +30,29 @@ public class Problem {
 			System.out.println(pctime);
 		}
 	}
+	
+	
+	public Sequence selectGoodParent(Population population)
+	{
+		double p = Math.random();
+		double cumulativeProbability = 0.0;
+		for (int i = 0; i < population.size(); i++) {
+		    cumulativeProbability += 2*(i+1)/(population.size() * (population.size()+1));
+		    if (p <= cumulativeProbability) {
+		        return population.get(i);
+		    }
+		}
+		return population.get(population.size() - 1);
+	}	
+	public Sequence mutate(Sequence gene)
+	{
+		int randomIndex = (int)(Math.random() * gene.size());
+		Integer tmp = gene.get(randomIndex);
+		gene.remove(randomIndex);
+		gene.add(randomIndex - (int)Math.random()*randomIndex, tmp);
+		return gene;
+	}
+	
+	
 	
 }

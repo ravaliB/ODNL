@@ -5,6 +5,7 @@ import iofile.Fileutils;
 
 import java.text.ParseException;
 import java.util.Random;
+import java.util.Date;
 
 import tool.Problem;
 
@@ -19,8 +20,8 @@ public class Main {
 		Population population;
 		Population newgen;
 		
-		PopulationGenerator popu_generator = new PopulationGenerator(p.initseed);
-		population = popu_generator.generate_population(p, 50);
+		PopulationGenerator popu_generator = new PopulationGenerator(p, p.initseed);
+		population = popu_generator.generate_population(1000);
 		newgen = popu_generator.generate_newgen(population);
 		
 		
@@ -28,7 +29,7 @@ public class Main {
 		int optimalvalue = newgen.get(newgen.size() -1).cost;
 		
 		//la reproduction
-		for (int i = 1; i < 20 ; i++)
+		for (int i = 1; i < 100 ; i++)
 		{
 			population = newgen;
 			newgen = popu_generator.generate_newgen(population);
@@ -45,8 +46,6 @@ public class Main {
 		
 		System.out.println("Best value found : " + optimalvalue);
 		System.out.println("Best Sequence " + newgen.get(newgen.size() -1));
-		
-		
 		
 		
 	}
