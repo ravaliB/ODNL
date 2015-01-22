@@ -47,12 +47,12 @@ public class Population extends ArrayList<Sequence>
 	
 	public Sequence best()
 	{
-		return this.get(0);
+		return this.get(this.size()-1);
 	}
 	
 	public Population best(int n)
 	{
-		return new Population(this.subList(0, n), sqE);
+		return new Population(this.subList(this.size()-1-n, this.size()-1), sqE);
 	}
 	
 	
