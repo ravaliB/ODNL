@@ -52,7 +52,9 @@ public class Population extends ArrayList<Sequence>
 	
 	public Population best(int n)
 	{
-		return new Population(this.subList(this.size()-n, this.size()-1), sqE);
+		List<Sequence> new_pop = this.subList(this.size()-n, this.size()-1);
+		Collections.reverse(new_pop);
+		return new Population(new_pop, sqE);
 	}
 	
 	public void probabilistic_distribution()
