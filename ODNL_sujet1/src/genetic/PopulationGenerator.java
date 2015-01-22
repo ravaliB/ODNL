@@ -39,22 +39,18 @@ public class PopulationGenerator
 		Random rn = new Random();
 		Population newgen = new Population(p.sqE, p.size());
 		
-		int indexp1;
-		int indexp2;
 		
 		Sequence parent1;
 		Sequence parent2;
 		for (int i = 0; i < p.size(); i += 2)
 		{
-			indexp1 = selectGoodParentIndex(p);
-			parent1 = p.get(indexp1);
-			
-			indexp2 = rn.nextInt(p.size());
-			while (indexp1 == indexp2)
+			parent1 = selectGoodParent(p);
+			parent2 = p.get(rn.nextInt(p.size()));
+			while (parent1 == parent2)
 			{
-				indexp2 = rn.nextInt(p.size());
+				parent2 = p.get(rn.nextInt(p.size()));
 			}
-			parent2 = p.get(indexp2);
+			parent2 = p.get(rn.nextInt(p.size()));
 			BuildChildren(newgen, parent1, parent2);
 		}
 		
@@ -132,17 +128,17 @@ public class PopulationGenerator
 		return p;
 	}
 	
-	private int selectGoodParentIndex(Population population)
+	private Sequence selectGoodParent(Population population)
 	{
 		double p = Math.random();
 		double cumulativeProbability = 0.0;
 		for (int i = 0; i < population.size(); i++) {
 		    cumulativeProbability += 2*(i+1)/(population.size() * (population.size()+1));
 		    if (p <= cumulativeProbability) {
-		        return i;
+		        return population.get(i);
 		    }
 		}
-		return population.size() - 1;
+		return population.get(population.size() - 1);
 	}
 	
 	
