@@ -28,15 +28,24 @@ public class Main {
 		System.out.println(newgen.get(newgen.size()-1).cost);
 		System.out.println(newgen.get(newgen.size()-1));
 		//newgen.best();
+		
 		Random rn = new Random();
+		
+		Sequence BestSequence = null;
 		int optimalvalue = newgen.get(newgen.size() -1).cost;
 		
+		
 		//la reproduction
-		for (int i = 1; i < 100 ; i++)
+		int iteration = 0;
+		while (optimalvalue >= 1297)
 		{
 			population = newgen;
 			newgen = popu_generator.generate_newgen(population);
-			optimalvalue = newgen.get(newgen.size() -1).cost;
+			if (optimalvalue > newgen.get(newgen.size() -1).cost)
+			{
+				BestSequence = newgen.get(newgen.size() -1);
+				optimalvalue = BestSequence.cost;
+			}
 			//la mutation
 			for (int j = 0; j < newgen.size(); j += newgen.size() / 10)
 			{
@@ -44,10 +53,11 @@ public class Main {
 			}
 			newgen.sort();
 			System.out.println(newgen.best());
-			System.out.println("Iteration n°" + i + " : Best value found => " +optimalvalue);
+			iteration++;
+			System.out.println("Iteration n°" + iteration + " : Best value found => " + optimalvalue );
 		}
 		System.out.println("Best value found : " + optimalvalue);
-		System.out.println("Best Sequence " + newgen.get(newgen.size() -1));
+		System.out.println("Best Sequence " + BestSequence);
 		
 		
 	}
