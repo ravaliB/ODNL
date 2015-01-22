@@ -77,14 +77,15 @@ public class FILEUTIL {
 
 				for (int day = 0; day < 5; ++day)
 				{
-					bw.write(tmp.Id + 1 + " " + day + 1 + " ");
+					int tday = day + 1;
+					bw.write(tmp.Id + 1 + " " + tday);
 
 					List<Integer> tmpl = tmp.travelId.get(day) == -1 ? new ArrayList<Integer>()	: travelList.get(tmp.travelId.get(day));
 
 					for (Iterator<Integer> it = tmpl.iterator(); it.hasNext();)
 					{
 						Integer intIt = it.next();
-						bw.write(intIt + " ");
+						bw.write(" " + Integer.toString(intIt));
 					}
       
 					bw.append(System.getProperty("line.separator"));

@@ -145,6 +145,7 @@ public class Tabou {
 		src.addAll(srcList);
 
 		if ((nb > 0) && !(totalworkTime > maxWorkTime_) && !(src.isEmpty()))
+		{
 			while (src.size() >= nb)
 			{
 				int idNextTravel = -1;
@@ -180,7 +181,8 @@ public class Tabou {
 					diffTime = totalworkTime + ScheduleUtile.substractTime(tmp.endT, tmp.startT);
 				}
 
-				List<Integer> newDeb = deb;
+				List<Integer> newDeb = new ArrayList<Integer>();
+				newDeb.addAll(deb);
 				newDeb.add(idNextTravel);
 
 				List<List<Integer>> comb = combinatory(nb - 1, src, newDeb, diffTime);
@@ -188,8 +190,11 @@ public class Tabou {
 				if (comb.size() > 0)
 					res.addAll(comb);
 			}
+		}
 		else
+		{
 			res.add(0, deb);
+		}
 
 		return res;
 	}
@@ -299,7 +304,7 @@ public class Tabou {
 			travels.add(new ArrayList<Travel>());
 			List<Integer> idsTravel = travelsList_.get(ws.travelId.get(i));
 
-			Integer idInt = -1;
+			Integer idInt;
 
 			for (Iterator<Integer> it = idsTravel.iterator(); it.hasNext();)
 			{
@@ -358,7 +363,6 @@ public class Tabou {
 
 						List<Integer> tmp2 = travelsList_.get(allMove_.get(i).travelId.get(day2));
 
-
 						if (!tmp2.isEmpty ())
 						{
 							Iterator<Integer> itInt = tmp.iterator();
@@ -368,15 +372,11 @@ public class Tabou {
 							{
 								tmpInt = itInt.next();
 
-								if (tmp2.contains(tmpInt) && (tmp2.indexOf(tmpInt) == tmp2.size()));
-								else
+								if (tmp2.contains(tmpInt))
+								{
+									allMove_.get(i).travelId.set(day2, -1);
 									break;
-
-							}
-
-							if ((tmp2.indexOf(tmpInt) != tmp2.get(tmp2.size() - 1)))
-							{
-								allMove_.get(i).travelId.set(day2, -1);
+								}
 							}
 						}
 					}
@@ -435,7 +435,6 @@ public class Tabou {
 		for (int day = 0; day < maxDay_; ++day)
 		{
 			Iterator<Integer> it = travelsID.get(day).iterator();
-
 			Integer idTravel;
 
 			while (it.hasNext())
@@ -464,10 +463,10 @@ public class Tabou {
 		return coef * workerNb + (totalTrajet - travelNb);
 	}
 
-	float GetEnergy()
+	private float GetEnergy()
 	{
 		Set<Integer> workerID = new HashSet<Integer>();
-		List<Set<Integer>> travelsID = new ArrayList<Set<Integer>>(); //travelsID / Day
+		List<Set<Integer>> travelsID = new ArrayList<Set<Integer>>();
 
 		for (int i = 0; i < maxDay_; i++)
 			travelsID.add(new HashSet<Integer>());

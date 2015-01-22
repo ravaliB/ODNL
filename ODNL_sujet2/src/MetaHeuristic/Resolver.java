@@ -86,13 +86,10 @@ public class Resolver {
 
 	public List<List<Integer>> run(List<ScheduleForWorker> result)
 	{
-		//long maxWorkTimeMin = 0;
-		//long minWork = 0;
-
-	//	Collections.sort(problem_,
-	//			TravelComparator.decending(TravelComparator.getComparator(TravelComparator.ID_COMP,
-	//				TravelComparator.HOUR_COMP,
-	//					TravelComparator.MIN_COMP)));
+		Collections.sort(problem_,
+				TravelComparator.decending(TravelComparator.getComparator(TravelComparator.ID_COMP,
+					TravelComparator.HOUR_COMP,
+						TravelComparator.MIN_COMP)));
 
 		for (int i = 0; i < problem_.size (); i++)
 		{
@@ -101,10 +98,8 @@ public class Resolver {
 			if (maxTravelId_ < t.id)
 				maxTravelId_ = t.id;
 
-		//	maxWorkTimeMin += ScheduleUtile.substractTime(t.endT, t.startT);
 		}
 
-		//minWork = (long) Math.ceil((maxWorkTimeMin / 60) / 5);
 		Tabou tabou = new Tabou(params_.maxTabuLen, maxTravelId_, result, problem_);
 
 		return tabou.Run();
