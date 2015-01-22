@@ -1,13 +1,18 @@
 package iofile;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import tool.ScheduleForWorker;
 import tool.Time;
 import tool.Travel;
 
@@ -19,7 +24,7 @@ public class FILEUTIL {
 		String splitBy = " ";
 		String splitByColon =  ":";
 		List<Travel> trajets = new ArrayList<Travel>();
-	
+
 		try {
 			br = new BufferedReader(new FileReader(file));
 
@@ -51,5 +56,48 @@ public class FILEUTIL {
 		}
 
 		return trajets;
+	}
+
+	public static void writeInFile(List<ScheduleForWorker> ws, List<List<Integer>> travelList, String filename)
+	{
+		try {
+			File file = new File(filename);
+
+			if (!file.exists())
+			{
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file.getAbsolutePath());
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			for (int i = 0; i < ws.size(); i++)
+			{
+				ScheduleForWorker tmp = ws.get(i);
+
+				for (int day = 0; day < 5; ++day)
+				{
+					bw.write(tmp.Id + 1 + " " + day + 1 + " ");
+
+					List<Integer> tmpl = tmp.travelId.get(day) == -1 ? new ArrayList<Integer>()	: travelList.get(tmp.travelId.get(day));
+
+					for (Iterator<Integer> it = tmpl.iterator(); it.hasNext();)
+					{
+						Integer intIt = it.next();
+						bw.write(intIt + " ");
+					}
+      
+					bw.append(System.getProperty("line.separator"));
+		    	}
+			}
+			
+			bw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

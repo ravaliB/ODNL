@@ -4,26 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleForWorker {
-	public int Id, dayId;
+	public int Id;
 	public List<Integer> travelId;
+	public boolean isActif;
 
 	public ScheduleForWorker()
 	{
-		this.Id = -1;
-		this.dayId = -1;
+		this.Id = 1;
+		this.isActif = true;
 		this.travelId = new ArrayList<Integer>();
+
+		for (int i = 0; i < 5; i++)
+			this.travelId.add(-1);
 	}
-	
-	public ScheduleForWorker(int Id, int dayId, List<Integer> travelId)
+
+	public ScheduleForWorker(int Id, List<Integer> travelId)
 	{
 		this.Id = Id;
-		this.dayId = dayId;
+		this.isActif = true;
 		this.travelId = travelId;
-	}
-	
-	public ScheduleForWorker(int Id, int dayId)
-	{
-		this.Id = Id;
-		this.dayId = dayId;
 	}
 }

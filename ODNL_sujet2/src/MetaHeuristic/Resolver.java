@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import tabou.Tabou;
-import tool.NewScheduleForWorker;
+import tool.ScheduleForWorker;
 //import tool.ScheduleUtile;
 //import tool.Time;
 import tool.Travel;
@@ -84,15 +84,15 @@ public class Resolver {
 
 	}
 
-	public List<List<Integer>> run(List<NewScheduleForWorker> result)
+	public List<List<Integer>> run(List<ScheduleForWorker> result)
 	{
 		//long maxWorkTimeMin = 0;
 		//long minWork = 0;
 
-		Collections.sort(problem_,
-				TravelComparator.decending(TravelComparator.getComparator(TravelComparator.ID_COMP,
-						TravelComparator.HOUR_COMP,
-						TravelComparator.MIN_COMP)));
+	//	Collections.sort(problem_,
+	//			TravelComparator.decending(TravelComparator.getComparator(TravelComparator.ID_COMP,
+	//				TravelComparator.HOUR_COMP,
+	//					TravelComparator.MIN_COMP)));
 
 		for (int i = 0; i < problem_.size (); i++)
 		{
@@ -105,8 +105,8 @@ public class Resolver {
 		}
 
 		//minWork = (long) Math.ceil((maxWorkTimeMin / 60) / 5);
-		Tabou t = new Tabou(params_.maxTabuLen, maxTravelId_, result, problem_);
+		Tabou tabou = new Tabou(params_.maxTabuLen, maxTravelId_, result, problem_);
 
-		return t.Run();
+		return tabou.Run();
 	}
 }

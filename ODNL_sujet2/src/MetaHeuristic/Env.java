@@ -2,7 +2,7 @@ package MetaHeuristic;
 
 import java.util.List;
 
-import tool.NewScheduleForWorker;
+import tool.ScheduleForWorker;
 import tool.Travel;
 
 public class Env {
@@ -18,7 +18,7 @@ public class Env {
 		return params_.input;
 	}
 
-	public List<List<Integer>> simulate(List<NewScheduleForWorker> result)
+	public List<List<Integer>> simulate(List<ScheduleForWorker> result)
 	{
 		Resolver resolv = new Resolver(this);
 		{

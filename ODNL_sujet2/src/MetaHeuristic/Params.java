@@ -16,6 +16,5 @@ public class Params {
 	
 	public Params()
 	{
-		
 	}
 }
